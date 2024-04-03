@@ -1,3 +1,4 @@
+
 function login(searchQuery) {
     return (dispatch, getState) => {
       const { id, password } = getState();
