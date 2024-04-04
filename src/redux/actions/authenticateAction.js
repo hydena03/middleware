@@ -1,10 +1,7 @@
-
-function login(searchQuery) {
-    return (dispatch, getState) => {
-      const { id, password } = getState();
-      dispatch({ type: "LOGIN_SUCCESS", payload: { id, password } });
-    };
+function login(id, password){
+  return (dispatch,getState)=>{
+      dispatch({type:"LOGIN_SUCCESS",payload:{id, password}})
   }
-  
-  export const authenticateAction = { login };
-  
+}
+
+export const authenticateAction={login}

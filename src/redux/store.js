@@ -1,23 +1,10 @@
-import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from '@redux-devtools/extension';
-import thunk from "redux-thunk"; // redux-thunk를 바르게 임포트
+import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./reducers";
 
-import authenticateReducer from "./reducers/authenticateReducer"; // authenticateReducer 임포트
-import productReducer from "./reducers/productReducer";
-
-import { configureStore } from "@reduxjs/toolkit"
-
-// let store = createStore(
-//     rootReducer, 
-//     composeWithDevTools(applyMiddleware(thunk)) 
-//     );
-
 const store = configureStore({
-    reducer:{
-        auth : authenticateReducer,
-        product : productReducer,
-    }
-})
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(), // 미들웨어 제거
+  devTools: process.env.NODE_ENV !== "production" // 개발 도구 설정 제거
+});
 
 export default store;

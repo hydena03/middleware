@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import ProductCard from "../component/productCard"; // 파일 이름 수정
+import ProductCard from "../component/productCard";
 import { useSearchParams } from "react-router-dom";
-import { productAction } from "../redux/actions/productAction";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../redux/reducers/productSlice";
 
 const ProductAll = () => {
   const productList = useSelector((state) => state.product.productList);
@@ -12,12 +12,12 @@ const ProductAll = () => {
   
   const getProducts = () => {
     let searchQuery = query.get("q") || "";
-    dispatch(productAction.getProducts(searchQuery));
+    dispatch(fetchProducts(searchQuery));
   };
 
   useEffect(() => {
     getProducts();
-  }, [query]);
+  }, []); // 빈 의존성 배열을 전달하여 의존성 문제를 해결합니다.
 
   return (
     <div>
